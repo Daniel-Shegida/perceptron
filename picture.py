@@ -1,13 +1,7 @@
-import numpy
-import PIL
 
 from PIL import Image
 from numpy import asarray
 import numpy as np
-
-
-import numpy as np
-import time
 import os.path
 
 class Perceptron:
@@ -43,7 +37,7 @@ class Perceptron:
         np.savetxt(self.fileName, self.weights, fmt='%1.4f')
         print("Total - error: {} ".format(err, 3))
 
-    def activation(self,x):
+    def activation(self, x):
         """ Функция активации (бинарная) """
         if np.sum(x) > 35:
             return 1
@@ -60,14 +54,7 @@ class Perceptron:
 
 
 if __name__ == '__main__':
-    """our data samples"""
-
     file = 'pics.txt'
-
-
-
-    # load the image and convert into
-    # numpy array
     img = Image.open('data\one.png').convert('L')
     one = asarray(img).flatten()
     img = Image.open('data\ones.png').convert('L')
@@ -81,22 +68,19 @@ if __name__ == '__main__':
     img = Image.open('data\lack.png').convert('L')
     blank = asarray(img).flatten()
 
-    X = [one,one1,two,tree,four,blank]
-    Y = [1,1,0,0,0,0]
-    # data
+    X = [one, one1, two, tree, four, blank]
+    Y = [1, 1, 0, 0, 0, 0]
 
     print(len(one))
 
-
     Perceptron = Perceptron(inputs=10100, name=file)
-
     Perceptron.train(X, Y, epochs=1111, lr=.01)
-
-    img = Image.open('data\oneee.png').convert('L')
-    one = asarray(img).flatten()
 
 
     """ for debugging"""
     # [print(perceptron.predict(np.array(x))) for x in X]
     [print(Perceptron.give_me_an_answer(x)) for x in X]
+    """" тестовое изображение """
+    img = Image.open('data\oneee.png').convert('L')
+    one = asarray(img).flatten()
     print(Perceptron.predict(np.array(one)))
