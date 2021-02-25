@@ -5,11 +5,11 @@ import os.path
 file = 'file.txt'
 
 
-class Perceptron():
+class Perceptron:
     def __init__(self, inputs=1, name='blank'):
         self.fileName = name
         """ Инициализация весов, если веса есть, используем их, иначе рандомим"""
-        if (os.path.exists(self.fileName)):
+        if os.path.exists(self.fileName):
             self.weights = np.loadtxt(self.fileName)
         else:
             self.weights = 2 * np.random.rand(inputs).T - 1  # Веса, -1 > w < 1
@@ -20,26 +20,26 @@ class Perceptron():
         y = self.activation(np.dot(x, self.weights))
         return y
 
-    def train(self, X, Y, epochs=1, lr=1):
+    def train(self, x, y, epochs=1, lr=1):
         """ Обучаем наш перцептрон """
-        T0 = time.time()
         print(self.weights)
         for i in range(epochs):
-            t0 = time.time()
-            for j in range(len(X)):
-                x = X[j]
-                y = Y[j]
+            for j in range(len(x)):
+                x = x[j]
+                y = y[j]
 
                 y_predict = self.predict(x)
 
                 err = (y - y_predict)
-                delta_weight = err * self.activation(y_predict, True)
-                #self.weights += x * (delta_weight * lr) kind of a variant
+                """kind of a variant"""
+                # delta_weight = err * self.activation(y_predict, True)
+                # self.weights += x * (delta_weight * lr)
+
                 self.weights += x * (err * lr)
 
-                print("\rEpoch #{} - error: {} - time {}sec.".format(i + 1, err, round(t0 - time.time(), 3)))
+                print("\rEpoch #{} - error: {}".format(i + 1, err, 3))
         np.savetxt(self.fileName, self.weights, fmt='%1.4f')
-        print("Total - error: {} - time {}sec.".format(err, round(T0 - time.time(), 3)))
+        print("Total - error: {} ".format(err, 3))
 
     def activation(self, x, deriv=False):
         """ Функция активации (сигмоида) """
@@ -50,10 +50,10 @@ class Perceptron():
     def give_me_an_answer(self, x):
         question = np.array(x)
         y = self.activation(np.dot(question, self.weights))
-        if (y > 0.9):
-            return ("it's 1")
+        if y > 0.9:
+            return "it's 1"
         else:
-            return ("it's not one")
+            return "it's not one"
 
 
 if __name__ == '__main__':
@@ -109,5 +109,5 @@ if __name__ == '__main__':
     perceptron.train(X, answers, epochs=1111, lr=.01)
 
     """ for debugging"""
-    [print(perceptron.predict(np.array(x))) for x in X]
+    # [print(perceptron.predict(np.array(x))) for x in X]
     [print(perceptron.give_me_an_answer(x)) for x in X]
