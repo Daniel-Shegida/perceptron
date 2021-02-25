@@ -53,7 +53,7 @@ class Perceptron:
             return "it's not one"
 
 
-# """our data samples"""
+"""our data samples"""
 m = mnist.MNIST('D:\MNIST_DATA')
 m.gz = True
 X, Y = m.load_training()
