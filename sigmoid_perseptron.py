@@ -1,5 +1,7 @@
+
 import numpy as np
 import os.path
+import mnist
 
 
 class Perceptron:
@@ -24,24 +26,22 @@ class Perceptron:
             for j in range(len(x_list)):
                 x = x_list[j]
                 y = y_list[j]
+                if y != 1:
+                    y = 0
+                x1 = np.array(x)
 
                 y_predict = self.predict(x)
 
                 err = (y - y_predict)
-                """kind of a variant"""
-                # delta_weight = err * self.activation(y_predict, True)
-                # self.weights += x * (delta_weight * lr)
-
-                self.weights += x * (err * lr)
+                weq = x1 * (err * lr)
+                self.weights += weq
 
                 print("\rEpoch #{} - error: {}".format(i + 1, err, 3))
         np.savetxt(self.fileName, self.weights, fmt='%1.4f')
         print("Total - error: {} ".format(err, 3))
 
-    def activation(self, x, deriv=False):
+    def activation(self, x):
         """ Функция активации (сигмоида) """
-        # if deriv:
-        # return self.activation(x) * (1 - self.activation(x))
         return 1 / (1 + np.exp(-x))
 
     def give_me_an_answer(self, x):
@@ -53,59 +53,20 @@ class Perceptron:
             return "it's not one"
 
 
-"""our data samples"""
-X = np.array([[0, 0, 1, 0, 0,
-               0, 1, 1, 0, 0,
-               1, 0, 1, 0, 0,
-               0, 0, 1, 0, 0,
-               0, 0, 1, 0, 0,
-               0, 0, 1, 0, 0,
-               1, 1, 1, 1, 1],
+# """our data samples"""
+m = mnist.MNIST('D:\MNIST_DATA')
+m.gz = True
+X, Y = m.load_training()
 
-              [0, 0, 0, 1, 0,
-               0, 0, 1, 1, 0,
-               0, 1, 0, 1, 0,
-               0, 0, 0, 1, 0,
-               0, 0, 0, 1, 0,
-               0, 0, 0, 1, 0,
-               1, 1, 1, 1, 1],
+file = 'test.txt'
 
-              [1, 1, 1, 1, 1,
-               1, 0, 0, 0, 0,
-               1, 0, 0, 0, 0,
-               1, 1, 1, 1, 1,
-               0, 0, 0, 0, 1,
-               0, 0, 0, 0, 1,
-               1, 1, 1, 1, 1],
+perceptron = Perceptron(inputs=784, name=file)
 
-              [1, 1, 1, 1, 1,
-               1, 0, 0, 0, 1,
-               1, 0, 0, 0, 1,
-               1, 1, 1, 1, 1,
-               1, 0, 0, 0, 1,
-               1, 0, 0, 0, 1,
-               1, 1, 1, 1, 1],
+perceptron.train(X, Y, epochs=1, lr=.01)
 
-              [1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1,
-               1, 1, 1, 1, 1]])
-
-answers = np.array([[1],
-                    [1],
-                    [0],
-                    [0],
-                    [0]])
-
-file = 'sigmoid.txt'
-
-perceptron = Perceptron(inputs=35, name=file)
-
-perceptron.train(X, answers, epochs=1111, lr=.01)
-
-""" for debugging"""
-# [print(perceptron.predict(np.array(x))) for x in X]
+# """ for debugging"""
+# # [print(perceptron.predict(np.array(x))) for x in X]
 [print(perceptron.give_me_an_answer(x)) for x in X]
+for i in range(1000):
+    print(perceptron.give_me_an_answer(X[i]))
+    print(Y[i])
