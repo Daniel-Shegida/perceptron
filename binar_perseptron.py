@@ -2,9 +2,6 @@ import numpy as np
 import time
 import os.path
 
-file = 'file.txt'
-
-
 class Perceptron:
     def __init__(self, inputs=1, name='blank'):
         self.fileName = name
@@ -20,20 +17,17 @@ class Perceptron:
         y = self.activation(np.dot(x, self.weights))
         return y
 
-    def train(self, x, y, epochs=1, lr=1):
+    def train(self, x_list, y_list, epochs=1, lr=1):
         """ Обучаем наш перцептрон """
         print(self.weights)
         for i in range(epochs):
-            for j in range(len(x)):
-                x = x[j]
-                y = y[j]
+            for j in range(len(x_list)):
+                x = x_list[j]
+                y = y_list[j]
 
                 y_predict = self.predict(x)
 
                 err = (y - y_predict)
-                """kind of a variant"""
-                # delta_weight = err * self.activation(y_predict, True)
-                # self.weights += x * (delta_weight * lr)
 
                 self.weights += x * (err * lr)
 
@@ -41,11 +35,12 @@ class Perceptron:
         np.savetxt(self.fileName, self.weights, fmt='%1.4f')
         print("Total - error: {} ".format(err, 3))
 
-    def activation(self, x, deriv=False):
+    def activation(self,x):
         """ Функция активации (сигмоида) """
-        if deriv:
-            return self.activation(x) * (1 - self.activation(x))
-        return 1 / (1 + np.exp(-x))
+        if np.sum(x) > 35:
+            return 1
+        else:
+            return 0
 
     def give_me_an_answer(self, x):
         question = np.array(x)
@@ -103,6 +98,7 @@ if __name__ == '__main__':
                         [0],
                         [0],
                         [0]])
+    file = 'binar.txt'
 
     perceptron = Perceptron(inputs=35, name=file)
 
