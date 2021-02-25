@@ -34,14 +34,8 @@ class Perceptron():
 
                 err = (y - y_predict)
                 delta_weight = err * self.activation(y_predict, True)
-                print("summ", x * (delta_weight * lr))
-                #self.weights += err
-
-                self.weights += x * (delta_weight * lr)
-
-                print(self.weights,'sdo')
-                [weight + 1 for weight in self.weights]
-                print(self.weights,'after')
+                #self.weights += x * (delta_weight * lr) kind of a variant
+                self.weights += x * (err * lr)
 
                 print("\rEpoch #{} - error: {} - time {}sec.".format(i + 1, err, round(t0 - time.time(), 3)))
         np.savetxt(self.fileName, self.weights, fmt='%1.4f')
@@ -112,8 +106,8 @@ if __name__ == '__main__':
 
     perceptron = Perceptron(inputs=35, name=file)
 
-    perceptron.train(X, answers, epochs=1, lr=.01)
+    perceptron.train(X, answers, epochs=1111, lr=.01)
 
     """ for debugging"""
-    # [print(perceptron.predict(np.array(x))) for x in X]
+    [print(perceptron.predict(np.array(x))) for x in X]
     [print(perceptron.give_me_an_answer(x)) for x in X]
