@@ -1,4 +1,4 @@
-from data_downloaders.get_mnist_data import get_mnist_data
+from data_downloaders.mnist_data import get_mnist_data
 from model.perseptron import Perceptron
 from functions.utils import ones
 

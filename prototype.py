@@ -1,6 +1,6 @@
 import numpy as np
 
-from data_downloaders.get_test_data import get_test_data
+from data_downloaders.test_data import get_test_data
 from model.perseptron import Perceptron
 from functions.binar import binar
 
