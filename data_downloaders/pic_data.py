@@ -1,7 +1,7 @@
 from PIL import Image
 from numpy import asarray
 
-def get_pic_data() :
+def get_pic_data() : # обучающие данные
     img = Image.open('data\one.png').convert('L')
     one = asarray(img).flatten()
     img = Image.open('data\ones.png').convert('L')
@@ -19,6 +19,6 @@ def get_pic_data() :
     Y = [1, 1, 0, 0, 0, 0]
     return X,Y
 
-def get_test_pic():
+def get_test_pic(): # тестовые данные
     img = Image.open('data\oneee.png').convert('L')
     return  asarray(img).flatten()
