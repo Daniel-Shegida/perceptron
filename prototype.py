@@ -9,9 +9,8 @@ if __name__ == '__main__':
     X, answers = get_test_data()
     file = 'prototype.txt'
 
-    perceptron = Perceptron(inputs=35, name=file,activ_fun= binar)
-    perceptron.train(X, answers, epochs=1111, lr=.01)
-
-    for i in len(X):
+    perceptron = Perceptron(inputs=35, name=file)
+    #perceptron.train(X, answers, epochs=1111, lr=.01)
+    for i in range(len(X)):
         print(perceptron.give_me_an_answer(X[i]))
         print("answer is: ", answers[i])
