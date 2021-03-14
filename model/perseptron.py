@@ -44,9 +44,14 @@ class Perceptron:
     def give_me_an_answer(self, x):  # just a joke function
         question = np.array(x)
         y = self.activation(np.dot(question, self.weights))
+        # if y > 0.5:
+        #     print("perception answer: ", y)
+        #     return "assumption: it's 1"
+        # else:
+        #     print("perception answer: ", y)
+        #     return "assumption: it's not one"
         if y > 0.9:
-            print("perception answer: ", y)
-            return "assumption: it's 1"
+            return 1
         else:
-            print("perception answer: ", y)
-            return "assumption: it's not one"
+            return 0
+

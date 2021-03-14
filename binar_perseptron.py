@@ -17,3 +17,5 @@ perceptron.train(X, Y, epochs=1, lr=.01)
 for i in range(1000):
     print(perceptron.give_me_an_answer(X[i]))
     print("answer is: ", Y[i])
+
+

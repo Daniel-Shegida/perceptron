@@ -7,3 +7,11 @@ def ones(x):
 
 def base(x):
     return x
+
+def give_me_ones(X,answers):
+    ones = []
+    for i in range(len(X)):
+        if answers[i] == 1:
+            ones.append(X[i])
+    return ones
+
