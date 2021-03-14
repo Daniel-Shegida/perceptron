@@ -50,7 +50,8 @@ class Perceptron:
         # else:
         #     print("perception answer: ", y)
         #     return "assumption: it's not one"
-        if y > 0.9:
+        # print(y,question)
+        if y > 0.5:
             return 1
         else:
             return 0
