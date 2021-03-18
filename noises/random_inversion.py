@@ -6,11 +6,7 @@ def add_noise(size,noise_value):
     return noise
 
 
-def get_random_noise_data(data, noise_percent, data_size = 256):
-    noise_data = []
-    for i in range(len(data)):
-        noise_data.append(list(data[i]))
-    noise_value = data_size/100 * noise_percent
+def get_random_inversion(noise_data, noise_percent, data_size = 256):
     for i in range(len(noise_data)):
         for k in range(len(noise_data[i])):
             if random.randint(0, 100) < noise_percent:

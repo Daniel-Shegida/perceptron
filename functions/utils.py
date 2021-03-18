@@ -15,3 +15,10 @@ def give_me_ones(X,answers):
             ones.append(X[i])
     return ones
 
+
+def copy2(arr):
+    copy = []
+    for i in range(len(arr)):
+        copy.append(list(arr[i]))
+    return copy
+
