@@ -1,6 +1,5 @@
 from functions.utils import copy2
 
-
 def get_noise_stat(perceptron, X, answers, noise_fun,number_of_study = 1000, noise_rise = 5):
     errors = []
     perc = []

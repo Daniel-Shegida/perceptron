@@ -1,11 +1,8 @@
-import numpy as np
 from data_downloaders.test_data import get_test_data
 from graphics.presentator import show
 from model.perseptron import Perceptron
-from functions.binar import binar
 from noises.noise_statistic import get_noise_stat
 from noises.random_inversion import get_random_inversion
-from test import get_noise_data
 
 if __name__ == '__main__':
     """our data samples"""
