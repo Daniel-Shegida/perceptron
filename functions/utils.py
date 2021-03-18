@@ -15,6 +15,11 @@ def give_me_ones(X,answers):
             ones.append(X[i])
     return ones
 
+def give_me_ones_list(X):
+    ones = []
+    for i in range(len(X)):
+        ones.append(1)
+    return ones
 
 def copy2(arr):
     copy = []
