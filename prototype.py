@@ -18,3 +18,4 @@ if __name__ == '__main__':
     show(table_x,table_y)
 
 
+get
