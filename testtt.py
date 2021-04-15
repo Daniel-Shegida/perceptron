@@ -18,6 +18,10 @@ class Kohonen_perceptron:
             self.weights = np.loadtxt(self.fileName)
         else:
             self.weights = np.random.rand(inputs)
+            # randiv = []
+            # for i in range(inputs):
+            #     randiv.append( np.random.uniform((0.5 - 1 / (math.sqrt(inputs))), (0.5 + 1 / (math.sqrt(inputs)))))
+            # self.weights =  np.asarray(randiv)
             np.savetxt(self.fileName, self.weights, fmt='%1.4f')
 
     def activation(self, x):
